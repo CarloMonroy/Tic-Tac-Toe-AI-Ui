@@ -3,6 +3,9 @@ const startbtn = document.querySelector(".start-btn");
 const endbtn = document.querySelector(".end-btn");
 const startwindow = document.querySelector(".options-screen");
 
+const user = "O";
+const bot = "X";
+
 let playing = false;
 
 const posList = [
@@ -17,9 +20,29 @@ const posList = [
   document.querySelector(".pos-9"),
 ];
 
-// Here i will create the internal representation of our board
-
 var board = [" ", " ", " ", " ", " ", " ", " ", " ", " "];
+
+//Start listener
+startbtn.addEventListener("click", function () {
+  startwindow.style.display = "none";
+  playing = true;
+});
+
+//Exit listener
+endbtn.addEventListener("click", function () {
+  playing = false;
+  location.reload();
+});
+botMove();
+
+for (let i = 0; i < posList.length; i++) {
+  posList[i].addEventListener("click", function () {
+    insertLetter(user, i);
+    botMove();
+  });
+}
+
+// Here i will create the internal representation of our board
 
 function is_free(position) {
   if (board[position] == " ") {
@@ -98,27 +121,69 @@ function insertLetter(letter, position) {
     }
     return;
   } else {
-    console.log("That position is not available");
+    console.log("That space is not avaialble");
+    return;
   }
 }
 
-const user = "O";
-const bot = "X";
+function botMove() {
+  var best_score = -800;
+  var best_move = 0;
 
-//Start listener
-startbtn.addEventListener("click", function () {
-  startwindow.style.display = "none";
-  playing = true;
-});
-
-//Exit listener
-endbtn.addEventListener("click", function () {
-  playing = false;
-  location.reload();
-});
-
-for (let i = 0; i < posList.length; i++) {
-  posList[i].addEventListener("click", function () {
-    insertLetter(user, i);
-  });
+  for (let i = 0; i < board.length; i++) {
+    if (board[i] == " ") {
+      board[i] = bot;
+      var score = minimax(board, 0, false);
+      board[i] = " ";
+      if (score > best_score) {
+        best_score = score;
+        best_move = i;
+      }
+    }
+  }
+  console.log(score);
+  console.log(best_move);
+  console.log(board);
+  insertLetter("bot", best_move); // Here we inster the final move
+  return;
 }
+
+function minimax(board, depth, is_maximizing) {
+  if (check_win_mark(bot)) {
+    return 1;
+  } else if (check_win_mark(user)) {
+    return -1;
+  } else if (check_draw()) {
+    return 0;
+  }
+
+  if (is_maximizing) {
+    var best_score = -800;
+    for (let i = 0; i < board.length; i++) {
+      if (board[i] == " ") {
+        board[i] = bot;
+        var score = minimax(board, 0, false);
+        board[i] = " ";
+        if (score > best_score) {
+          best_score = score;
+        }
+      }
+    }
+    return best_score;
+  } else {
+    best_score = 800;
+    for (let i = 0; i < board.length; i++) {
+      if (board[i] == " ") {
+        board[i] = user;
+        score = minimax(board, 0, true);
+        board[i] = " ";
+        if (score < best_score) {
+          best_score = score;
+        }
+      }
+    }
+    return best_score;
+  }
+}
+
+while (playing) {}
