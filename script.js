@@ -169,7 +169,7 @@ function botMove() {
   console.log(score);
   console.log(best_move);
   console.log(board);
-  insertLetter("bot", best_move); // Here we inster the final move
+  insertLetter(bot, best_move); // Here we inster the final move
   return;
 }
 
