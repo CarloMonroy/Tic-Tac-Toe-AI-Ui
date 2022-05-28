@@ -142,7 +142,6 @@ function insertLetter(letter, position) {
         console.log("BOT WINS");
       } else {
         console.log("User wins");
-        showWin();
       }
     }
     return;
