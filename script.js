@@ -1,6 +1,7 @@
 "use strict";
 const startbtn = document.querySelector(".start-btn");
 const endbtn = document.querySelector(".end-btn");
+const endbtn2 = document.querySelector(".end-btn2");
 const startwindow = document.querySelector(".options-screen");
 const resultModal = document.querySelector(".result-modal");
 const resultText = document.querySelector(".result-text");
@@ -34,6 +35,12 @@ endbtn.addEventListener("click", function () {
   playing = false;
   location.reload();
 });
+
+//Exit listener
+endbtn2.addEventListener("click", function () {
+  playing = false;
+  location.reload();
+});
 botMove();
 
 for (let i = 0; i < posList.length; i++) {
@@ -64,32 +71,23 @@ function check_draw() {
 
 function check_win() {
   if (board[0] == board[1] && board[0] == board[2] && board[0] != " ") {
-    showWin();
     return true;
   } else if (board[3] == board[4] && board[3] == board[5] && board[3] != " ") {
-    showWin();
     return true;
   } else if (board[6] == board[7] && board[6] == board[8] && board[6] != " ") {
-    showWin();
     return true;
   } else if (board[0] == board[3] && board[0] == board[6] && board[0] != " ") {
-    showWin();
     return true;
   } else if (board[1] == board[4] && board[1] == board[7] && board[1] != " ") {
-    showWin();
     return true;
   } else if (board[2] == board[5] && board[2] == board[8] && board[2] != " ") {
-    showWin();
     return true;
   } else if (board[0] == board[4] && board[0] == board[8] && board[0] != " ") {
-    showWin();
     return true;
   } else if (board[6] == board[4] && board[6] == board[2] && board[6] != " ") {
-    showWin();
     return true;
   } else {
     return false;
-    showLost();
   }
 }
 
@@ -125,18 +123,26 @@ function showLost() {
   resultText.innerHTML = "You Lost";
 }
 
+function showDraw() {
+  resultModal.style.display = "block";
+  resultText.innerHTML = "Draw";
+}
+
 function insertLetter(letter, position) {
   if (is_free(position)) {
     board[position] = letter;
     posList[position].innerHTML = letter;
     if (check_draw()) {
       console.log("Draw");
+      showDraw();
     }
     if (check_win()) {
       if (letter == "X") {
+        showLost();
         console.log("BOT WINS");
       } else {
         console.log("User wins");
+        showWin();
       }
     }
     return;
