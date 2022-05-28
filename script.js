@@ -5,6 +5,7 @@ const endbtn2 = document.querySelector(".end-btn2");
 const startwindow = document.querySelector(".options-screen");
 const resultModal = document.querySelector(".result-modal");
 const resultText = document.querySelector(".result-text");
+const initialText = document.querySelector(".title");
 const user = "O";
 const bot = "X";
 
@@ -116,16 +117,19 @@ function check_win_mark(mark) {
 function showWin() {
   resultModal.style.display = "block";
   resultText.innerHTML = "You Won";
+  initialText.style.display = "none";
 }
 
 function showLost() {
   resultModal.style.display = "block";
   resultText.innerHTML = "You Lost";
+  initialText.style.display = "none";
 }
 
 function showDraw() {
   resultModal.style.display = "block";
   resultText.innerHTML = "Draw";
+  initialText.style.display = "none";
 }
 
 function insertLetter(letter, position) {
