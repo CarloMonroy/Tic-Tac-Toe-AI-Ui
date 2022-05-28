@@ -2,7 +2,8 @@
 const startbtn = document.querySelector(".start-btn");
 const endbtn = document.querySelector(".end-btn");
 const startwindow = document.querySelector(".options-screen");
-
+const resultModal = document.querySelector(".result-modal");
+const resultText = document.querySelector(".result-text");
 const user = "O";
 const bot = "X";
 
@@ -63,23 +64,32 @@ function check_draw() {
 
 function check_win() {
   if (board[0] == board[1] && board[0] == board[2] && board[0] != " ") {
+    showWin();
     return true;
   } else if (board[3] == board[4] && board[3] == board[5] && board[3] != " ") {
+    showWin();
     return true;
   } else if (board[6] == board[7] && board[6] == board[8] && board[6] != " ") {
+    showWin();
     return true;
   } else if (board[0] == board[3] && board[0] == board[6] && board[0] != " ") {
+    showWin();
     return true;
   } else if (board[1] == board[4] && board[1] == board[7] && board[1] != " ") {
+    showWin();
     return true;
   } else if (board[2] == board[5] && board[2] == board[8] && board[2] != " ") {
+    showWin();
     return true;
   } else if (board[0] == board[4] && board[0] == board[8] && board[0] != " ") {
+    showWin();
     return true;
   } else if (board[6] == board[4] && board[6] == board[2] && board[6] != " ") {
+    showWin();
     return true;
   } else {
     return false;
+    showLost();
   }
 }
 
@@ -103,6 +113,16 @@ function check_win_mark(mark) {
   } else {
     return false;
   }
+}
+
+function showWin() {
+  resultModal.style.display = "block";
+  resultText.innerHTML = "You Won";
+}
+
+function showLost() {
+  resultModal.style.display = "block";
+  resultText.innerHTML = "You Lost";
 }
 
 function insertLetter(letter, position) {

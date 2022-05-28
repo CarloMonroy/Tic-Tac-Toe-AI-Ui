@@ -60,3 +60,19 @@ body {
   background-color: aqua;
   border-radius: 10%;
 }
+
+.result-modal {
+  --gap: 15px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vw;
+  display: flex;
+  justify-content: center;
+  box-sizing: border-box;
+  padding: var(--gap);
+  background-color: rgba(0, 0, 0, 0.5);
+  text-align: center;
+  display: none;
+}
