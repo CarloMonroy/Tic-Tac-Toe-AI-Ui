@@ -1,5 +1,6 @@
 body {
-  background-color: #c2ded1;
+  background-color: #dbdffd;
+  color: #242f9b;
 }
 .title {
   display: flex;
@@ -23,7 +24,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: gray;
+  background-color: #9ba3eb;
   padding: 3px;
   width: 100px;
   height: 100px;
@@ -78,6 +79,7 @@ body {
 }
 
 .window2 {
+  margin: 0 auto;
   margin-top: 35px;
   background: #fff;
   width: 50%;
